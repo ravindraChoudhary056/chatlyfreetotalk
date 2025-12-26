@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="signup.css" />
+</head>
+<body>
+
+  <div class="container">
+    <div class="card">
+        <h2>Welcome Chatly</h2>
+      <h3>Create Account</h3>
+      <p class="subtitle">Chat freely, Stay connected.</p>
+
+      <form id="signupForm">
+        <div class="input-group">
+          <label>First name</label>
+          <input id="signupFirst" name="firstName" type="text" placeholder="First name" required />
+        </div>
+        <div class="input-group">
+          <label>Last name</label>
+          <input id="signupLast" name="lastName" type="text" placeholder="Last name" required />
+        </div>
+        <div class="input-group">
+          <label>Username</label>
+          <input id="signupUsername" name="username" type="text" placeholder="Enter username" required />
+        </div>
+
+        <div class="input-group">
+          <label>Password</label>
+          <input id="signupPassword" name="password" type="password" placeholder="Enter password" required />
+        </div>
+
+        <button type="submit">Sign Up</button>
+
+        <p class="login-text">
+          Already have an account?
+          <a href="signin.html">Sign In</a>
+        </p>
+      </form>
+
+      <script>
+        document.getElementById('signupForm').addEventListener('submit', async function (e) {
+          e.preventDefault();
+          const firstName = document.getElementById('signupFirst').value.trim();
+          const lastName = document.getElementById('signupLast').value.trim();
+          const username = document.getElementById('signupUsername').value.trim();
+          const password = document.getElementById('signupPassword').value;
+          if (!firstName || !lastName || !username || !password) {
+            alert('Please fill all fields');
+            return;
+          }
+
+          try {
+            const res = await fetch('http://localhost:5003/api/auth/signup', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ firstName, lastName, username, password })
+            });
+            const data = await res.json();
+            if (!res.ok) return alert(data.message || 'Signup failed');
+            // store token and user
+            localStorage.setItem('todoloToken', data.token);
+            localStorage.setItem('todoloUserObj', JSON.stringify(data.user));
+            window.location.href = 'chat.html';
+          } catch (err) {
+            console.error(err);
+            alert('Signup failed');
+          }
+        });
+      </script>
+    </div>
+  </div>
+
+</body>
+</html>

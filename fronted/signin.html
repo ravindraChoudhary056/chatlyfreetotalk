@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="signup.css" />
+</head>
+<body>
+
+  <div class="container">
+    <div class="card">
+        <h2>Welcome Chatly</h2>
+      <h3>Sign In</h3>
+      <p class="subtitle">Chat freely, Stay connected.</p>
+
+      <form id="signinForm">
+        <div class="input-group">
+          <label>Username</label>
+          <input id="signinUsername" name="username" type="text" placeholder="Enter username" required />
+        </div>
+
+        <div class="input-group">
+          <label>Password</label>
+          <input id="signinPassword" name="password" type="password" placeholder="Enter password" required />
+        </div>
+
+        <button type="submit">Sign In</button>
+
+        <p class="login-text">
+            Don't have an account?
+          <a href="signup.html">Sign Up</a>
+        </p>
+      </form>
+
+      <script>
+        document.getElementById('signinForm').addEventListener('submit', async function (e) {
+          e.preventDefault();
+          const username = document.getElementById('signinUsername').value.trim();
+          const password = document.getElementById('signinPassword').value;
+          if (!username || !password) return alert('Please fill all fields');
+
+          try {
+            const res = await fetch('http://localhost:5003/api/auth/signin', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ username, password })
+            });
+            const data = await res.json();
+            if (!res.ok) return alert(data.message || 'Signin failed');
+            localStorage.setItem('todoloToken', data.token);
+            localStorage.setItem('todoloUserObj', JSON.stringify(data.user));
+            window.location.href = 'chat.html';
+          } catch (err) {
+            console.error(err);
+            alert('Signin failed');
+          }
+        });
+      </script>
+    </div>
+  </div>
+
+</body>
+</html>

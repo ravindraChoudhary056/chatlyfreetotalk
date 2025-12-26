@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todolo Chat</title>
+  <link rel="stylesheet" href="chat.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-left">
+      <h1 class="app-name">Chatly</h1>
+    </div>
+    <div class="navbar-right">
+      <div id="currentUserDisplay" class="current-user">Guest</div>
+      <button class="navbar-btn logout-btn" aria-label="Logout">🚪 Logout</button>
+    </div>
+  </nav>
+
+  <div class="main-container">
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h2>Chats</h2>
+        <input id="userSearch" class="search-input" type="text" placeholder="Search users..." />
+      </div>
+      <div class="users-list" id="usersList">
+        </div>
+    </div>
+
+    <div class="chat-container" id="chatContainer">
+      <div class="chat-header" id="chatHeader">
+        <button class="mobile-back-btn" id="mobileBackBtn">← Back</button>
+        <div class="header-user-info">
+            <div id="headerAvatar" class="user-avatar small-avatar">?</div>
+            <h2 class="chat-user-name" id="chatUserName">Select a user</h2>
+        </div>
+        <div class="chat-header-actions">
+            <button id="chatOptionsBtn" class="chat-options-btn" aria-label="Chat options">⋮</button>
+            <div id="chatOptionsMenu" class="chat-options-menu hidden">
+                <button id="resetChatBtn" class="action-btn danger"> Disable Chat</button>
+            </div>
+        </div>
+      </div>
+
+      <div class="chat-messages" id="chatMessages">
+        </div>
+
+      <div id="requestPanel" class="request-panel hidden">
+        <div class="request-content">
+            <p id="requestText">Send a message request to start chatting.</p>
+            <div id="requestInputGroup" class="request-input-group">
+                <input type="text" id="initialRequestMsg" placeholder="Say hello..." />
+                <button id="sendRequestBtn" class="action-btn primary">Send Request</button>
+            </div>
+            <div id="acceptRejectGroup" class="request-actions hidden">
+                <button id="acceptBtn" class="action-btn success">Accept</button>
+                <button id="rejectBtn" class="action-btn danger">Reject</button>
+            </div>
+        </div>
+      </div>
+
+      <div class="chat-input-area" id="inputArea">
+        <input type="text" class="chat-input" id="messageInput" placeholder="Type a message..." />
+        <button class="send-btn" id="sendBtn">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+  <script src="chat.js"></script>
+</body>
+</html>

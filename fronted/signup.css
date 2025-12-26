@@ -1,0 +1,132 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* container */
+.container {
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+}
+
+/* card */
+.card {
+  background: #ffffff;
+  padding: 38px 32px;
+  border-radius: 14px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 0.8s ease;
+}
+
+/* headings */
+.card h2 {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  color: #075e54; /* WhatsApp green */
+  margin-bottom: 4px;
+}
+
+.card h3 {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 28px;
+}
+
+/* input group */
+.input-group {
+  margin-bottom: 18px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 13px 14px;
+  border-radius: 10px;
+  border: 1.5px solid #ddd;
+  outline: none;
+  font-size: 14px;
+  transition: all 0.25s ease;
+}
+
+.input-group input:focus {
+  border-color: #25d366;
+  box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.15);
+}
+
+/* button */
+button {
+  width: 100%;
+  padding: 13px;
+  margin-top: 6px;
+  background: linear-gradient(135deg, #25d366, #1ebe5d);
+  border: none;
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+}
+
+/* login text */
+.login-text {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #555;
+}
+
+.login-text a {
+  color: #075e54;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-text a:hover {
+  text-decoration: underline;
+}
+
+/* animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
