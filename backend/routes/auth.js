@@ -48,10 +48,10 @@ router.post('/signin', async (req, res) => {
     if (!username || !password) return res.status(400).json({ message: 'Missing fields' });
 
     const user = await User.findOne({ username: username.toLowerCase() });
-    if (!user) return res.status(400).json({ message: 'Invalid credentials' });
+    if (!user) return res.status(400).json({ message: 'dont exit your account , please sign up' });
 
     const match = await bcrypt.compare(password, user.password);
-    if (!match) return res.status(400).json({ message: 'Invalid credentials' });
+    if (!match) return res.status(400).json({ message: 'Wrong password' });
 
     const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '7d' });
     res.json({ 
