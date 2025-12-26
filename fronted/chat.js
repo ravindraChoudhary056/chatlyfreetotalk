@@ -10,7 +10,7 @@ let unreadSet = new Set();
 let newRequestSet = new Set();
 
 // Initialize Socket.io - Ensure backend URL matches your server
-const socket = io('http://localhost:5003');
+const socket = io('https://chatlyfreetotalk.onrender.com');
 
 // Socket connection handlers
 socket.on('connect', () => {
@@ -135,7 +135,7 @@ function formatTime(dateString) {
 // ============ API CALLS ============
 async function fetchUsers() {
     try {
-        const res = await fetch('http://localhost:5003/api/users/all', {
+        const res = await fetch('https://chatlyfreetotalk.onrender.com/api/users/all', {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         const data = await res.json();
@@ -269,7 +269,7 @@ async function selectUser(user) {
     dom.headerAvatar.textContent = getInitials(user.firstName, user.lastName);
 
     try {
-        const res = await fetch(`http://localhost:5003/api/messages/${myId}/${userId}`, {
+        const res = await fetch(`https://chatlyfreetotalk.onrender.com/api/messages/${myId}/${userId}`, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         const data = await res.json();
@@ -346,7 +346,7 @@ function showRequestUI(user, status, requestId) {
 
 async function handleRequestAction(action, requestId, user) {
     try {
-        const res = await fetch(`http://localhost:5003/api/requests/${action}/${requestId}`, {
+        const res = await fetch(`https://chatlyfreetotalk.onrender.com/api/requests/${action}/${requestId}`, {
             method: 'POST',
             headers: { 'Authorization': `Bearer ${token}` }
         });
@@ -384,7 +384,7 @@ function attachGlobalEvents() {
         if (!txt || !selectedUserId) return;
 
         try {
-            const res = await fetch('http://localhost:5003/api/messages/send', {
+            const res = await fetch('https://chatlyfreetotalk.onrender.com/api/messages/send', {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -420,7 +420,7 @@ function attachGlobalEvents() {
             if (!txt || !selectedUserId) return;
 
             try {
-                const res = await fetch('http://localhost:5003/api/requests/send', {
+                const res = await fetch('https://chatlyfreetotalk.onrender.com/api/requests/send', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -474,7 +474,7 @@ function attachGlobalEvents() {
 
             try {
                 const myId = String(currentUserObj.id);
-                const res = await fetch(`http://localhost:5003/api/messages/reset/${myId}/${selectedUserId}`, {
+                const res = await fetch(`https://chatlyfreetotalk.onrender.com/api/messages/reset/${myId}/${selectedUserId}`, {
                     method: 'POST',
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
