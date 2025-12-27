@@ -71,6 +71,20 @@ async function init() {
             console.log('📋 Socket rooms after join:', socket.rooms ? Array.from(socket.rooms) : 'N/A');
         }, 500);
     };
+
+    // Desktop: allow Enter (without Shift) to send message — Shift+Enter inserts newline
+    const messageInputEl = dom.messageInput;
+    if (messageInputEl) {
+        messageInputEl.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                if (window.innerWidth >= 768) {
+                    e.preventDefault();
+                    const sendBtn = document.getElementById('sendBtn');
+                    if (sendBtn) sendBtn.click();
+                }
+            }
+        });
+    }
     
     if (socket.connected) {
         joinRoom();
@@ -464,7 +478,27 @@ function attachGlobalEvents() {
     const chatOptionsMenu = document.getElementById('chatOptionsMenu');
     const resetChatBtn = document.getElementById('resetChatBtn');
     if (chatOptionsBtn && chatOptionsMenu) {
-        chatOptionsBtn.onclick = () => chatOptionsMenu.classList.toggle('hidden');
+        chatOptionsBtn.onclick = (e) => {
+            e.stopPropagation();
+            chatOptionsMenu.classList.toggle('hidden');
+        };
+
+        // Close the options menu when clicking anywhere outside the menu or button
+        document.addEventListener('click', (ev) => {
+            if (!chatOptionsMenu.classList.contains('hidden')) {
+                const target = ev.target;
+                if (!chatOptionsMenu.contains(target) && !chatOptionsBtn.contains(target)) {
+                    chatOptionsMenu.classList.add('hidden');
+                }
+            }
+        });
+
+        // Allow Escape key to close the menu
+        document.addEventListener('keydown', (ev) => {
+            if (ev.key === 'Escape' && !chatOptionsMenu.classList.contains('hidden')) {
+                chatOptionsMenu.classList.add('hidden');
+            }
+        });
     }
     if (resetChatBtn) {
         resetChatBtn.onclick = async () => {
